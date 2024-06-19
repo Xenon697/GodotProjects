@@ -23,10 +23,6 @@ var current_fov: float = normal_fov
 @export var accel: float = 35.0
 @export var move_speed: float = 2.0
 
-@export_category("Stair Stepping")
-@export var max_step_up: float = 0.2
-@export var max_step_down: float = 0.2
-
 @export_category("Head Bob")
 var time: float
 @export var bob_freq: float = 5.75
