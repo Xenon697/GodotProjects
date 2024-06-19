@@ -1,10 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dey63g7rnrxww"]
+[gd_scene load_steps=7 format=3 uid="uid://dey63g7rnrxww"]
 
 [ext_resource type="Texture2D" uid="uid://8wcs3vw2ch6n" path="res://textures/icon.svg" id="1_urw11"]
 [ext_resource type="PackedScene" uid="uid://bbkxi6em00guj" path="res://scenes/player_character.tscn" id="2_jtl1r"]
-
-[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_32yf4"]
-size = Vector3(20, 7, 20)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jsioc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,10 +24,6 @@ uv2_triplanar = true
 uv2_world_triplanar = true
 
 [node name="World" type="Node3D"]
-
-[node name="Occlusion Culler" type="OccluderInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-occluder = SubResource("BoxOccluder3D_32yf4")
 
 [node name="Environment" type="Node" parent="."]
 

@@ -36,10 +36,7 @@ var time: float
 
 @onready var cam: Camera3D = $Camera
 @onready var light: SpotLight3D = $Camera/Flashlight
-@onready var light_switch: AudioStreamPlayer = $"Flashlight Switch Player"
 @onready var ray: RayCast3D = $"Camera/Interact Ray"
-@onready var surface_checker = $"Surface Checker"
-@onready var footsteps: AudioStreamPlayer = $"Footstep Player"
 
 var flashlight_on: bool = false
 
@@ -95,26 +92,6 @@ func stop_head_bob(delta: float) -> void:
 	cam.position.y = lerpf(cam.position.y, cam_height, 15 * delta)
 	cam.position.x = lerpf(cam.position.x, 0.0, 15 * delta)
 
-
-func check_surface() -> void:
-	pass
-
-
-func play_footsteps() -> void:
-	pass
-
-
-func stop_footsteps() -> void:
-	pass
-
-
-func stair_step_up() -> void:
-	pass
-
-
-func stair_step_down() -> void:
-	pass
-
 # ------------------------------------------------------------------------------
 
 func _physics_process(delta):
@@ -134,13 +111,11 @@ func _physics_process(delta):
 
 func light_on() -> bool:
 	light.visible = true
-	light_switch.play(0.0)
 	return light.visible
 
 
 func light_off() -> bool:
 	light.visible = false
-	light_switch.play(0.0)
 	return light.visible
 
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbkxi6em00guj"]
+[gd_scene load_steps=6 format=3 uid="uid://bbkxi6em00guj"]
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_lrd6r"]
 [ext_resource type="PackedScene" uid="uid://sus8tjexdxvq" path="res://scenes/interface/HUD.tscn" id="2_1ynd0"]
-[ext_resource type="AudioStream" uid="uid://cxb0ncevk3buc" path="res://audio/sound effects/flashlight_switch.wav" id="2_dla32"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_okhbe"]
 radius = 0.2
@@ -41,13 +40,5 @@ spot_angle = 35.0
 
 [node name="Interact Ray" type="RayCast3D" parent="Camera"]
 target_position = Vector3(0, 0, -1)
-
-[node name="Flashlight Switch Player" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_dla32")
-
-[node name="Surface Checker" type="RayCast3D" parent="."]
-target_position = Vector3(0, -0.1, 0)
-
-[node name="Footstep Player" type="AudioStreamPlayer" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("2_1ynd0")]
