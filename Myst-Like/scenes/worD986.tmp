@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dey63g7rnrxww"]
+
+[ext_resource type="Texture2D" uid="uid://8wcs3vw2ch6n" path="res://textures/icon.svg" id="1_urw11"]
+[ext_resource type="PackedScene" uid="uid://bbkxi6em00guj" path="res://scenes/player_character.tscn" id="2_jtl1r"]
+
+[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_32yf4"]
+size = Vector3(20, 7, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jsioc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fkb8f"]
+sky_material = SubResource("ProceduralSkyMaterial_jsioc")
+
+[sub_resource type="Environment" id="Environment_cb5v5"]
+background_mode = 2
+sky = SubResource("Sky_fkb8f")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vawo3"]
+albedo_texture = ExtResource("1_urw11")
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_triplanar = true
+uv2_world_triplanar = true
+
+[node name="World" type="Node3D"]
+
+[node name="Occlusion Culler" type="OccluderInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+occluder = SubResource("BoxOccluder3D_32yf4")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Sky" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_cb5v5")
+
+[node name="Sun" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Arena" type="Node" parent="."]
+
+[node name="CSG Combiner" type="CSGCombiner3D" parent="Arena"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Arena/CSG Combiner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+size = Vector3(20, 0.1, 20)
+material = SubResource("StandardMaterial3D_vawo3")
+
+[node name="Floor2" type="CSGBox3D" parent="Arena/CSG Combiner"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 9.95, -10)
+size = Vector3(20, 0.1, 20)
+material = SubResource("StandardMaterial3D_vawo3")
+
+[node name="Player Character" parent="." instance=ExtResource("2_jtl1r")]

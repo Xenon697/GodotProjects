@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxb0ncevk3buc"
+path="res://.godot/imported/flashlight_switch.wav-f5dfdc500456b31038adc848540efe41.sample"
+
+[deps]
+
+source_file="res://audio/sound effects/flashlight_switch.wav"
+dest_files=["res://.godot/imported/flashlight_switch.wav-f5dfdc500456b31038adc848540efe41.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

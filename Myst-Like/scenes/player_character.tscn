@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbkxi6em00guj"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_lrd6r"]
+[ext_resource type="PackedScene" uid="uid://sus8tjexdxvq" path="res://scenes/interface/HUD.tscn" id="2_1ynd0"]
+[ext_resource type="AudioStream" uid="uid://cxb0ncevk3buc" path="res://audio/sound effects/flashlight_switch.wav" id="2_dla32"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_okhbe"]
+radius = 0.2
+height = 1.8
+
+[sub_resource type="Gradient" id="Gradient_bdrkn"]
+offsets = PackedFloat32Array(0.4, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k2huu"]
+gradient = SubResource("Gradient_bdrkn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[node name="Player Character" type="CharacterBody3D"]
+script = ExtResource("1_lrd6r")
+
+[node name="Collision Hull" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_okhbe")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+current = true
+fov = 59.0
+
+[node name="Flashlight" type="SpotLight3D" parent="Camera"]
+visible = false
+light_energy = 2.0
+light_projector = SubResource("GradientTexture2D_k2huu")
+shadow_enabled = true
+spot_range = 50.0
+spot_angle = 35.0
+
+[node name="Interact Ray" type="RayCast3D" parent="Camera"]
+target_position = Vector3(0, 0, -1)
+
+[node name="Flashlight Switch Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dla32")
+
+[node name="Surface Checker" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.1, 0)
+
+[node name="Footstep Player" type="AudioStreamPlayer" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("2_1ynd0")]
