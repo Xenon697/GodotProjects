@@ -13,7 +13,6 @@ extends CharacterBody3D
 @export var max_pitch: float = 89.0
 @export var normal_fov: float = 59.0
 @export var zoom_fov: float = 30.0
-@export var camera_smoothing: float = 18.0
 var current_fov: float = normal_fov
 
 @export_category("Gravity")
