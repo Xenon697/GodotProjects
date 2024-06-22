@@ -39,6 +39,6 @@ spot_range = 50.0
 spot_angle = 35.0
 
 [node name="Interact Ray" type="RayCast3D" parent="Camera"]
-target_position = Vector3(0, 0, -1.6)
+target_position = Vector3(0, 0, -1)
 
 [node name="HUD" parent="." instance=ExtResource("2_1ynd0")]

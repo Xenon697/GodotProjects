@@ -5,6 +5,8 @@ extends CharacterBody3D
 # VARIABLES
 # ==============================================================================
 
+signal player_wants_to_interact
+
 @export_category("Mouse Sensitivity")
 @export var mouse_sense: float = 0.002
 
@@ -33,8 +35,6 @@ var time: float
 @onready var light: SpotLight3D = $Camera/Flashlight
 @onready var ray: RayCast3D = $"Camera/Interact Ray"
 
-var flashlight_on: bool = false
-
 # ==============================================================================
 # PHYSICS FUNCTIONS
 # ==============================================================================
@@ -51,6 +51,7 @@ func _unhandled_input(event):
 		cam.rotation.x = clampf(cam.rotation.x, deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 		cam.transform = cam.transform.orthonormalized()
 
+# ------------------------------------------------------------------------------
 
 func apply_gravity(delta: float) -> void:
 	velocity.y -= gravity * delta
@@ -65,6 +66,7 @@ func get_dir() -> Vector3:
 	var dir: Vector3 = transform.basis * Vector3(get_in_vec().x, 0.0, get_in_vec().y).normalized()
 	return dir
 
+# ------------------------------------------------------------------------------
 
 func move_player(delta: float) -> void:
 	velocity.z = lerpf(velocity.z, get_dir().z * move_speed, accel * delta)
@@ -75,6 +77,7 @@ func stop_player(delta: float) -> void:
 	velocity.z = lerpf(velocity.z, 0.0, accel * delta)
 	velocity.x = lerpf(velocity.x, 0.0, accel * delta)
 
+# ------------------------------------------------------------------------------
 
 func do_head_bob(delta) -> void:
 	time += delta
@@ -113,6 +116,7 @@ func light_off() -> bool:
 	light.visible = false
 	return light.visible
 
+# ------------------------------------------------------------------------------
 
 func zoom_in() -> void:
 	current_fov = zoom_fov
@@ -124,6 +128,8 @@ func zoom_out() -> void:
 # ------------------------------------------------------------------------------
 
 func _process(delta):
+	var object: Node3D = ray.get_collider()
+
 	cam.fov = lerpf(cam.fov, current_fov, 10.0 * delta)
 
 	if Input.is_action_just_pressed("Flashlight") && !light.visible:
