@@ -132,11 +132,15 @@ func _process(delta):
 
 	cam.fov = lerpf(cam.fov, current_fov, 10.0 * delta)
 
-	if Input.is_action_just_pressed("Flashlight") && !light.visible:
-		light_on()
-	elif Input.is_action_just_pressed("Flashlight") && light.visible:
-		light_off()
-	if Input.is_action_just_pressed("Zoom"):
-		zoom_in()
-	elif Input.is_action_just_released("Zoom"):
-		zoom_out()
+	if Input.is_action_just_pressed("Flashlight") && !light.visible: light_on()
+	elif Input.is_action_just_pressed("Flashlight") && light.visible: light_off()
+
+	if Input.is_action_just_pressed("Zoom"): zoom_in()
+	elif Input.is_action_just_released("Zoom"): zoom_out()
+
+	if ray.is_colliding() && object is Interactable:
+		Signal_Bus.interactable_in_range.emit()
+		if Input.is_action_just_pressed("Interact"):
+			Signal_Bus.player_wants_to_interact.emit()
+	else:
+		Signal_Bus.interactable_out_of_range.emit()
