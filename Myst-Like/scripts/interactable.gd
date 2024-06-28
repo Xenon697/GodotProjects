@@ -6,7 +6,7 @@ extends Node3D
 
 
 func _ready() -> void:
-	Signal_Bus.wants_to_interact.connect(on_wants_to_interact)
+	Signal_Bus.player_wants_to_interact.connect(on_wants_to_interact)
 
 
 func on_wants_to_interact() -> void:

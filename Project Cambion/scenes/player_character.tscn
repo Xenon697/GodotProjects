@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://doeqmc52kp2qp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t45xf"]
+radius = 0.34
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lbmwn"]
+radius = 0.34
+
+[node name="Player" type="CharacterBody3D"]
+
+[node name="Collision Hull" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_t45xf")
+
+[node name="Character Placeholder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_lbmwn")
+
+[node name="Camera Boom" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.9, 0)
+spring_length = 4.0
+
+[node name="Camera" type="Camera3D" parent="Camera Boom"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 4)
+current = true
+fov = 59.0
